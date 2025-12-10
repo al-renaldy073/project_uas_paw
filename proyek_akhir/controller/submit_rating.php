@@ -29,13 +29,10 @@ if ($id_film <= 0 || $rating < 1 || $rating > 5) {
 
 $conn = get_connection();
 
-// cek apakah user sudah pernah memberi rating
 $existing = get_user_rating($conn, $id_user, $id_film);
 
-// cek apakah user sudah pernah memberi rating
 $existing = get_user_rating($conn, $id_user, $id_film);
 
-// simpan rating
 if ($existing == 0) {
     insert_rating($conn, $id_user, $id_film, $rating, $komentar);
 } else {
@@ -51,3 +48,4 @@ mysqli_close($conn);
 // kembali ke halaman detail
 header("Location: ../controller/detailFilm_controller.php?id=$id_film");
 exit();
+
