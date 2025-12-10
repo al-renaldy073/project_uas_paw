@@ -9,22 +9,6 @@ if (!isset($_SESSION['login'])) {
 
 include '../model/watchlist_model.php';
 
-// if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id_film'])) {
-//     $id_user = $_SESSION['id_user'];
-//     $id_film = $_GET['id_film'];
-
-//     $result = add_to_watchlist($id_user, $id_film);
-
-//     if ($result == "success") {
-//         echo "<script>alert('Berhasil ditambahkan ke Watchlist!'); window.history.back();</script>";
-//     } elseif ($result == "exists") {
-//         echo "<script>alert('Film sudah ada di Watchlist!'); window.history.back();</script>";
-//     } else {
-//         echo "<script>alert('Gagal menambahkan Watchlist!'); window.history.back();</script>";
-//     }
-//     exit;
-// }
-
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id_film'])) {
     $id_film = $_GET['id_film'];
     $id_user = $_SESSION['id_user'];
@@ -55,5 +39,6 @@ function watchlist_index() {
 
 
 watchlist_index();
+
 
 ?>
