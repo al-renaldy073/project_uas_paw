@@ -38,7 +38,6 @@ function get_all_dashboard() {
 function get_top_films($limit = 10) {
     $conn = get_connection();
 
-    // Genre terblokir untuk id_origin = 2
     $blocked_genres = "4,5";
 
     $filter = "";
@@ -100,4 +99,5 @@ function get_all_films() {
 }
 
 ?>
+
 
