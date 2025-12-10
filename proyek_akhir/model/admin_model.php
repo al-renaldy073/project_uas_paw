@@ -21,7 +21,6 @@ function get_all_tables() {
 }
 
 function get_all_data($table) {
-    // Validasi: jika table null atau kosong, return array kosong
     if (!$table || trim($table) === '') {
         return [];
     }
@@ -103,7 +102,6 @@ function get_by_id($table, $id_field, $id) {
 }
 
 function get_columns($table) {
-    // Validasi: jika table null atau kosong, return array kosong
     if (!$table || trim($table) === '') {
         return [];
     }
@@ -139,7 +137,6 @@ function get_columns_info($table) {
 }
 
 function get_primary_key($table) {
-    // Hardcode mapping berdasarkan struktur database Anda
     $hardcoded_mapping = [
         'films' => 'id_film',
         'users' => 'id_user',
@@ -188,16 +185,13 @@ function get_foreign_options($foreign_table, $value_column, $display_column) {
     
     $conn = get_connection();
     
-    // Cek apakah kolom display ada
     $check_sql = "SHOW COLUMNS FROM $foreign_table LIKE '$display_column'";
     $check_result = mysqli_query($conn, $check_sql);
     
-    // Jika kolom display tidak ada, gunakan value_column
     if (!$check_result || mysqli_num_rows($check_result) == 0) {
         $display_column = $value_column;
     }
     
-    // Query dengan error handling
     $sql = "SELECT $value_column, $display_column FROM $foreign_table ORDER BY $value_column";
     
     try {
@@ -213,7 +207,6 @@ function get_foreign_options($foreign_table, $value_column, $display_column) {
         
         return $options;
     } catch (Exception $e) {
-        // Jika error, return array kosong
         error_log("Error in get_foreign_options: " . $e->getMessage());
         return [];
     }
@@ -226,7 +219,6 @@ function insert_data($table, $data, $files = []) {
     
     $conn = get_connection();
     
-    // Handle file upload
     foreach ($files as $field => $file) {
         if ($file['error'] == 0) {
             $filename = time() . '_' . $file['name'];
@@ -242,12 +234,10 @@ function insert_data($table, $data, $files = []) {
         }
     }
     
-    // Handle password hashing
     if ($table == 'users' && isset($data['password']) && !empty($data['password'])) {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
     }
     
-    // Remove empty values
     $filtered_data = array_filter($data, function($value) {
         return $value !== '';
     });
@@ -267,20 +257,16 @@ function update_data($table, $id, $data, $files = []) {
     
     $conn = get_connection();
     
-    // Dapatkan primary key dengan benar
     $id_field = get_primary_key($table);
     
-    // DEBUG DETAILED
     error_log("DEBUG update_data: table=$table, id=$id, id_field=$id_field");
     error_log("DEBUG POST data received: " . print_r($data, true));
     
-    // Jika id_field masih null, kita tidak bisa melanjutkan
     if (!$id_field) {
         error_log("ERROR: Cannot determine primary key for table $table");
         return false;
     }
     
-    // Handle file upload
     foreach ($files as $field => $file) {
         if ($file['error'] == 0) {
             $filename = time() . '_' . $file['name'];
@@ -293,7 +279,6 @@ function update_data($table, $id, $data, $files = []) {
             if (move_uploaded_file($file['tmp_name'], $upload_dir . $filename)) {
                 $data[$field] = $filename;
                 
-                // Delete old file if exists
                 $old_file = $_POST['old_' . $field] ?? '';
                 if ($old_file && file_exists($upload_dir . $old_file)) {
                     unlink($upload_dir . $old_file);
@@ -330,7 +315,6 @@ function update_data($table, $id, $data, $files = []) {
         $set_parts[] = "`$column` = '$value'";
     }
     
-    // BUILD SQL dengan backticks untuk menghindari masalah reserved words
     $sql = "UPDATE `$table` SET " . implode(', ', $set_parts) . " WHERE `$id_field` = '$id'";
     
     error_log("DEBUG FINAL SQL: $sql");
@@ -425,10 +409,6 @@ function get_film_rating_terendah() {
     return mysqli_query($conn, $query);
 }
 
-/* =============================
-   2. LAPORAN WATCHLIST
-============================= */
-
 function get_laporan_watchlist() {
     $conn = get_connection();
     $query = "
@@ -489,5 +469,6 @@ function get_top_films_in_school($limit = 10) {
     
     return mysqli_query($conn, $query);
 }
+
 
 ?>
