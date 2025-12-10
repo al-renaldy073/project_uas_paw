@@ -406,10 +406,8 @@ $action = $_GET['action'] ?? '';
             justify-content: space-between;
             align-items: center;
             font-size: 15px;
-            /* margin-bottom: 15px; */
         }
 
-        
         /* TABLE STYLES */
         .table-container {
             background: #fff;
@@ -445,8 +443,6 @@ $action = $_GET['action'] ?? '';
         td:last-child {
             width: 100px;
         }
-    
-        
         tr:hover {
             background: #f8f9fa;
         }
@@ -580,7 +576,7 @@ $action = $_GET['action'] ?? '';
         <div class="nav-links">
             <a class="btn-genre nav-item" href="../controller/dashboard_controller.php">Home</a>
             <a class="btn-genre nav-item" href="../controller/genre_controller.php">Genres</a>
-            <a class="btn-popular nav-item" href="#">Popularity</a>
+            <a class="btn-popular nav-item" href="../controller/popularity_controller.php">Popularity</a>
             <a class="btn-master nav-item active" href="../controller/admin_controller.php">Admin</a>
             <a class="btn-master nav-item" href="#"><i class="bi bi-bookmark-plus"></i> Watchlist</a>
             <div class="dropdown-logout" id="dropdownUser">
@@ -864,3 +860,4 @@ $action = $_GET['action'] ?? '';
         }
     });
 </script>
+
