@@ -1,5 +1,7 @@
 <?php
-
+function get_connection() {
+    return mysqli_connect("localhost", "root", "", "movie_rating");
+}
 function get_popularity_data($id_film = null) {
     $conn = get_connection();
 
@@ -51,3 +53,4 @@ function get_all_popularity_sorted() {
 
 
 ?>
+
