@@ -20,10 +20,8 @@ function detailFilm_index() {
 
     $id_film = (int)$_GET['id'];
 
-    // hitung rata-rata rating
     $avg_rating = get_average_rating($conn, $id_film);
 
-    // hitung total user yang memberi rating
     $total_ratings = get_total_ratings($conn, $id_film);
 
     $row = get_detailFilm_by_id($id_film);
@@ -33,10 +31,8 @@ function detailFilm_index() {
         exit();
     }
 
-    // ambil komentar dengan rating
     $comments = get_comments_by_film($id_film);
 
-    // kirim ke view
     $data['avg_rating'] = $avg_rating;
     $data['total_ratings'] = $total_ratings;
     $data['film'] = $row;
@@ -46,5 +42,6 @@ function detailFilm_index() {
 }
 
 detailFilm_index();
+
 
 ?>
