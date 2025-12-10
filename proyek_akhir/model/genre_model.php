@@ -62,7 +62,6 @@ function get_films_by_genre($id_genre) {
     return $rows;
 }
 
-//  ALL FILMS GROUPED BY GENRE
 function get_all_films_grouped_by_genre() {
     $genres = get_all_genres(); 
     $result = [];
@@ -78,3 +77,4 @@ function get_all_films_grouped_by_genre() {
 }
 
 ?>
+
