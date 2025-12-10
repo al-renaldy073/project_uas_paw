@@ -32,21 +32,17 @@ switch($action) {
 }
 
 function admin_index($table) {
-    // Inisialisasi variabel dengan default value
     $data = [];
     $columns = [];
     $all_tables = [];
     
-    // Hanya ambil data jika table dipilih
     if ($table) {
         $data = get_all_data($table);
         $columns = get_columns($table);
         $all_tables = get_all_tables();
         
-        // Simpan di session untuk digunakan nanti
         $_SESSION['current_table'] = $table;
     } else {
-        // Reset session jika tidak ada table yang dipilih
         unset($_SESSION['current_table']);
     }
     
@@ -99,7 +95,6 @@ function admin_edit($table) {
     $id = $_GET['id'] ?? 0;
     $id_field = get_primary_key($table);
     
-    // VALIDASI PRIMARY KEY
     if (!$id_field) {
         $_SESSION['error'] = "Primary key tidak ditemukan untuk tabel $table";
         header("Location: admin_controller.php?action=index&table=$table");
@@ -159,4 +154,5 @@ function admin_hapus($table) {
     header("Location: admin_controller.php?action=index&table=$table");
     exit();
 }
+
 ?>
