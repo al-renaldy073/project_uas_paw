@@ -114,7 +114,6 @@
             display: none;
             position: absolute;
             top: 40px;
-            /* right: 0; */
             background-color: #17397bff;
             width: 140px;
             border-radius: 100px;
@@ -204,20 +203,18 @@
             margin: 4px 0;
         }
        .rank-badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: #007bff;
-        color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 15px;
-        z-index: 20;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-    }
-
-        
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #007bff;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 15px;
+            z-index: 20;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
         .see-all {
             display: block; 
             margin: 40px auto 0; 
@@ -287,30 +284,38 @@
             font-size: 14px;
             color: #ffae00;
         }
-        .btn-watchlist,
-        .btn-trailer {
-            width: 100%;
-            margin-top: 8px;
-            padding: 8px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .btn-watchlist {
-            background: #0B1A39;
-            color: white;
-        }
-        .btn-watchlist:hover {
-            background: #070c17ff;
-        }
-        .btn-trailer {
-            background: #d9deea;
-            color: #0B1A39;
-        }
-        .btn-trailer:hover {
-            background: #c5cbdb;
-        }
+            .btn-watchlist,
+            .btn-trailer {
+                display: block;  
+                width: 92%;
+                margin-top: 8px;
+                padding: 8px;
+                border: none;
+                text-decoration: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: bold;
+                text-align: center;
+            }
+            .btn-watchlist {
+                background: #0B1A39;
+                color: white;
+                margin-left: 8px;
+
+            }
+            .btn-watchlist:hover {
+                background: #070c17ff;
+            }
+            .btn-trailer {
+                background: #d9deea;
+                color: #0B1A39;
+                margin-left: 8px;
+
+            }
+            .btn-trailer:hover {
+                background: #c5cbdb;
+            }
         .arrow-btn {
             position: absolute;
             top: 50%;
@@ -379,13 +384,16 @@
             grid-template-columns: repeat(5, 1fr); /* 5 kolom */
             gap: 25px;
         }
-
+        .container1 {
+        padding: 3px 2px;
+        
+        }
         .card {
-        position: relative;
-        background: white;
-        border-radius: 12px;
-        padding: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         .card img {
             width: 100%;
@@ -402,6 +410,35 @@
             font-size: 14px;
             color: #444;
         }
+
+        .card .btn-watchlist,
+        .card .btn-trailer {
+            width: 80%;
+            margin: 8px auto 0 auto; /* Center */
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .card .btn-watchlist {
+            background: #0B1A39;
+            color: white;
+        }
+        .card .btn-watchlist:hover {
+            background: #091124;
+        }
+
+        .card .btn-trailer {
+            background: #d9deea;
+            color: #0B1A39;
+        }
+        .card .btn-trailer:hover {
+            background: #c5cbdb;
+        }
+
     </style>
 
 </head>
@@ -440,71 +477,73 @@
 
        <div class="fan-container">
             
-<?php if(isset($result) && is_array($result) && !empty($result)): ?>
-    <?php $rank = 1; foreach($result as $row): ?>
+    <?php if(isset($result) && is_array($result) && !empty($result)): ?>
+        <?php $rank = 1; foreach($result as $row): ?>
 
-        <div class="fan-card">
+            <div class="fan-card">
 
-            <!-- RANK BADGE -->
-            <div class="rank-badge">#<?php echo $rank; ?></div>
+                <!-- RANK BADGE -->
+                <div class="rank-badge">#<?php echo $rank; ?></div>
 
-            <a href="../controller/detailFilm_controller.php?id=<?php echo $row['id_film']; ?>" style="text-decoration:none; color:inherit;">
-                <img src="../view/img/img_poster/<?php echo htmlspecialchars($row['poster']); ?>" 
-                     alt="<?php echo htmlspecialchars($row['judul_film']); ?>">
-                
-                <div class="fan-info">
-                    <span class="rating">⭐ <?php echo number_format($row['avg_rating'], 1); ?></span>
-                    <h3><?php echo htmlspecialchars($row['judul_film']); ?></h3>
-                    <p><strong>Tahun:</strong> <?php echo $row['tahun_rilis']; ?></p>
-                    <p><strong>Genre:</strong> <?php echo htmlspecialchars($row['name_genre']); ?></p>
-                </div>
-            </a>
+                <a href="../controller/detailFilm_controller.php?id=<?php echo $row['id_film']; ?>" style="text-decoration:none; color:inherit;">
+                    <img src="../view/img/img_poster/<?php echo htmlspecialchars($row['poster']); ?>" 
+                        alt="<?php echo htmlspecialchars($row['judul_film']); ?>">
+                    
+                    <div class="fan-info">
+                        <span class="rating">⭐ <?php echo number_format($row['avg_rating'], 1); ?></span>
+                        <h3><?php echo htmlspecialchars($row['judul_film']); ?></h3>
+                        <p><strong>Tahun:</strong> <?php echo $row['tahun_rilis']; ?></p>
+                        <p><strong>Genre:</strong> <?php echo htmlspecialchars($row['name_genre']); ?></p>
+                    </div>
+                </a>
 
-            <button class="btn-watchlist">+ Watchlist</button>
-            <button class="btn-trailer">▶ Trailer</button>
-        </div>
+                <button class="btn-watchlist">+ Watchlist</button>
+                <button class="btn-trailer">▶ Trailer</button>
+            </div>
 
-    <?php $rank++; endforeach; ?>
-<?php else: ?>
-    <p style="text-align: center; color: #666;">No films available.</p>
-<?php endif; ?>
+        <?php $rank++; endforeach; ?>
+    <?php else: ?>
+        <p style="text-align: center; color: #666;">No films available.</p>
+    <?php endif; ?>
 
-</div>
+    </div>
 
 
+    <div class="section-header">
         <div class="line"></div>
-        <h2>all films</h2></div>
-<div class="container">
-
-<?php if(isset($all_films) && !empty($all_films)): ?>
-    <?php $rank_all = 1; foreach($all_films as $film): ?>
-    
-        <div class="card">
-
-            <!-- RANK -->
-            <div class="rank-badge">#<?php echo $rank_all; ?></div>
-
-            <a href="../controller/detailFilm_controller.php?id=<?php echo $film['id_film']; ?>" 
-               style="text-decoration:none; color:inherit;">
-               
-                <img src="../view/img/img_poster/<?php echo $film['poster']; ?>" 
-                     alt="<?php echo htmlspecialchars($film['judul_film']); ?>" 
-                     style="width:100%; height:300px; object-fit:cover; border-radius:10px;">
-
-                <h3><?php echo htmlspecialchars($film['judul_film']); ?></h3>
-                <p><strong>Tahun:</strong> <?php echo $film['tahun_rilis']; ?></p>
-                <p><strong>Genre:</strong> <?php echo htmlspecialchars($film['name_genre']); ?></p>
-            </a>
-
-            <button class="btn-watchlist">+ Watchlist</button>
-            <button class="btn-trailer">▶ Trailer</button>
-
+        <div class="container1">
+        <h2>Top popular films 1-100</h2>
         </div>
+    </div>
+    <div class="container">
 
-    <?php $rank_all++; endforeach; ?>
-<?php else: ?>
-    <p style="text-align:center; color:#555;">Belum ada film.</p>
-<?php endif; ?>
+    <?php if(isset($all_films) && !empty($all_films)): ?>
+        <?php $rank_all = 1; foreach($all_films as $film): ?>
+        
+            <div class="card">
+
+                <!-- RANK -->
+                <div class="rank-badge">#<?php echo $rank_all; ?></div>
+
+                <a href="../controller/detailFilm_controller.php?id=<?php echo $film['id_film']; ?>" 
+                style="text-decoration:none; color:inherit;">
+                
+                    <img src="../view/img/img_poster/<?php echo $film['poster']; ?>" 
+                        alt="<?php echo htmlspecialchars($film['judul_film']); ?>" 
+                        style="width:100%; height:300px; object-fit:cover; border-radius:10px;">
+
+                    <h3><?php echo htmlspecialchars($film['judul_film']); ?></h3>
+                    <p><strong>Tahun:</strong> <?php echo $film['tahun_rilis']; ?></p>
+                    <p><strong>Genre:</strong> <?php echo htmlspecialchars($film['name_genre']); ?></p>
+                </a>
+                    <a class="btn-watchlist" href="../controller/watchlist_controller.php?action=add&id_film=<?php echo $row['id_film']; ?>">+ Watchlist</a>
+                    <a class="btn-trailer"  href="<?php echo htmlspecialchars($row['trailer']); ?>">▶ Trailer</a>
+            </div>
+
+        <?php $rank_all++; endforeach; ?>
+    <?php else: ?>
+        <p style="text-align:center; color:#555;">Belum ada film.</p>
+    <?php endif; ?>
 
 </div>
 
