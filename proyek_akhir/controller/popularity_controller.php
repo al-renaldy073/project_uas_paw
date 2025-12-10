@@ -6,7 +6,6 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 
-include "../model/dashboard_model.php";
 include "../model/popularity_model.php";
 
 function get_index_popularity() {
@@ -45,5 +44,6 @@ function get_index_popularity() {
 }
 
 get_index_popularity();
+
 
 ?>
