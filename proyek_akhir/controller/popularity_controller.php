@@ -17,7 +17,7 @@ function get_index_popularity() {
  
     if ($user_punya_sekolah) {
 
-        $all_films = get_all_films();
+        $all_films = get_all_popularity_sorted() ;
 
         // Filter genre
         $all_films = array_filter($all_films, function($film) {
@@ -38,7 +38,7 @@ function get_index_popularity() {
     $data_popular = get_popularity_data();
     $result       = $data_popular['top_films'] ?? [];
 
-    $all_films = get_all_films();
+    $all_films = get_all_popularity_sorted() ;
 
     include "../view/popularity/popularity_view.php";
 }
@@ -47,3 +47,4 @@ get_index_popularity();
 
 
 ?>
+
